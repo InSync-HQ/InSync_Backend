@@ -1,5 +1,5 @@
 export const db = {
-    envUrl: process.env.DB_DEV_URL || "",
+    devUrl: process.env.DB_DEV_URL || "",
     prodUrl: process.env.DB_PROD_URL || "",
 }
 export const environment = process.env.NODE_ENV || "";

@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
 import { db, environment } from "../config";
+import logger from "../core/logger";
 
 // Build the connection string
-const dbURI: string = environment === "dev" ? db.dev : db.prod;
+const dbURI: string = environment === "dev" ? db.devUrl : db.prodUrl;
 
 const options = {
     useNewUrlParser: true,
@@ -17,39 +18,39 @@ const options = {
     socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
 };
 
-Logger.debug(dbURI);
+logger.debug(dbURI);
 
 // Create the database connection
 mongoose
     .connect(dbURI, options)
     .then(() => {
-        Logger.info("Mongoose connection done");
+        logger.info("Mongoose connection done");
     })
     .catch((e) => {
-        Logger.info("Mongoose connection error");
-        Logger.error(e);
+        logger.info("Mongoose connection error");
+        logger.error(e);
     });
 
 // CONNECTION EVENTS
 // When successfully connected
 mongoose.connection.on("connected", () => {
-    Logger.info("Mongoose default connection open to " + dbURI);
+    logger.info("Mongoose default connection open to " + dbURI);
 });
 
 // If the connection throws an error
 mongoose.connection.on("error", (err) => {
-    Logger.error("Mongoose default connection error: " + err);
+    logger.error("Mongoose default connection error: " + err);
 });
 
 // When the connection is disconnected
 mongoose.connection.on("disconnected", () => {
-    Logger.info("Mongoose default connection disconnected");
+    logger.info("Mongoose default connection disconnected");
 });
 
 // If the Node process ends, close the Mongoose connection
 process.on("SIGINT", () => {
     mongoose.connection.close(() => {
-        Logger.info(
+        logger.info(
             "Mongoose default connection disconnected through app termination"
         );
         process.exit(0);
