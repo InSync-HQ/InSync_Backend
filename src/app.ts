@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
 app.use("/", routes);
 
 // catch 404 and forward to error handler
-app.use((req, res, next) => next(new Error(`No Such route Found: ${res.req.originalUrl}`));
+app.use((req, res, next) => next(new Error(`No Such route Found: ${res.req.originalUrl}`)));
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     logger.error(err);
