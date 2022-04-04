@@ -2,9 +2,9 @@ import express from "express";
 import cors from "cors";
 
 import routes from "./router"
+import { port } from "./config";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 process.on("uncaughtException", (e) => {
     console.error(e);
@@ -24,6 +24,6 @@ app.get("/", (req, res) => {
 
 app.use("/", routes);
 
-app.listen(PORT, () => {
-    console.log(`Server started at ${PORT}`);
+app.listen(port, () => {
+    console.log(`Server started at port:${port}`);
 })
