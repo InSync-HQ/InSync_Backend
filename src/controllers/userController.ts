@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { Registervalidation, LoginValidation } from "./validation";
 
 export const registerUser = async (req: Request, res: Response) => {
-    const { error } = Registervalidation(req.body);
+    const { error } = await Registervalidation(req.body);
     if (error) {
         return res.status(400).send(error.details[0].message);
     }
@@ -22,7 +22,7 @@ export const registerUser = async (req: Request, res: Response) => {
     }
 }
 export const loginUser = async (req: Request, res: Response) => {
-    const { error } = LoginValidation(req.body);
+    const { error } = await LoginValidation(req.body);
     if (error) {
         return res.status(400).send(error.details[0].message);
     }

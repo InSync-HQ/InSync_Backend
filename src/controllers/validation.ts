@@ -2,7 +2,7 @@
 const Joi = require("@hapi/joi");
 
 //Register validation
-export const Registervalidation = async (data: any) => {
+export const Registervalidation = async (data: any): Promise<any> => {
     const schema = {
         name: Joi.string().min(6).required(),
         email: Joi.string().min(6).required().email(),
@@ -12,7 +12,7 @@ export const Registervalidation = async (data: any) => {
 }
 
 //Login validation
-export const LoginValidation = async (data: any) => {
+export const LoginValidation = async (data: any): Promise<any> => {
     const schema = {
         name: Joi.string().min(6).required(),
         password: Joi.string().min(6).required()
