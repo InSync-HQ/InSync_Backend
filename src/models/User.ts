@@ -1,11 +1,11 @@
 import { Schema, Document, model } from "mongoose";
-import { requiredString, optionalStringArray, requiredStringArray } from "./reusableModelComp"
+import { requiredString, optionalStringArray, optionalString, requiredStringArray } from "./reusableModelComp"
 
 export const DOCUMENT_NAME = "user";
 export const COLLECTION_NAME = "users";
 
 export interface IUser extends Document {
-    name: string;
+    name?: string;
     email: string;
     pwd: string;
     communities?: string[];
@@ -14,7 +14,7 @@ export interface IUser extends Document {
 }
 
 export const userSchema = new Schema({
-    name: { ...requiredString },
+    name: { ...optionalString },
     email: { ...requiredString },
     pwd: { ...requiredString },
     communities: { ...optionalStringArray },

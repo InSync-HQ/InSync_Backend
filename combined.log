@@ -22,3 +22,16 @@ info: POST /user/login 400 18 - 21.342 ms
 info: POST /user/login 400 18 - 19.893 ms
 info: POST /user/login 400 18 - 46.801 ms
 info: POST /user/login 400 52 - 22.222 ms
+info: POST /user/register 400 18 - 16.349 ms
+info: POST /user/register 400 18 - 4.755 ms
+info: POST /user/register 400 18 - 2.986 ms
+info: POST /user/register 400 537 - 27.794 ms
+info: POST /user/register 400 22 - 4.375 ms
+info: POST /user/register 400 537 - 33.300 ms
+info: POST /user/register 400 319 - 85.256 ms
+info: POST /user/register 400 2 - 10114.668 ms
+info: POST /user/register 400 47 - 5.776 ms
+info: POST /user/register 400 2 - 10023.443 ms
+info: POST /user/login 400 17 - 2.263 ms
+info: POST /user/login - - - - ms
+info: POST /user/register - - - - ms

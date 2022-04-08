@@ -6,7 +6,7 @@ const reusableModelComp_1 = require("./reusableModelComp");
 exports.DOCUMENT_NAME = "user";
 exports.COLLECTION_NAME = "users";
 exports.userSchema = new mongoose_1.Schema({
-    name: { ...reusableModelComp_1.requiredString },
+    name: { ...reusableModelComp_1.optionalString },
     email: { ...reusableModelComp_1.requiredString },
     pwd: { ...reusableModelComp_1.requiredString },
     communities: { ...reusableModelComp_1.optionalStringArray },
