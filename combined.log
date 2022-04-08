@@ -1,3 +1,0 @@
-info: GET / 200 36 - 6.867 ms
-error: No Such route Found: /favicon.ico
-info: GET /favicon.ico 500 33 - 2.088 ms

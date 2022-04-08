@@ -15,9 +15,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/concurrently": "^7.0.0",
     "@types/dotenv": "^8.2.0",
     "@types/mongoose": "^5.11.97",
     "@types/morgan": "^1.9.3",
+    "@types/nodemon": "^1.19.1",
     "@types/typescript": "^2.0.0",
     "@types/winston": "^2.4.4",
     "concurrently": "^7.1.0",
