@@ -6,11 +6,12 @@ const reusableModelComp_1 = require("./reusableModelComp");
 exports.DOCUMENT_NAME = "user";
 exports.COLLECTION_NAME = "users";
 exports.userSchema = new mongoose_1.Schema({
+    name: { ...reusableModelComp_1.requiredString },
     email: { ...reusableModelComp_1.requiredString },
     pwd: { ...reusableModelComp_1.requiredString },
-    communities: { ...reusableModelComp_1.requiredStringArray },
+    communities: { ...reusableModelComp_1.optionalStringArray },
     saved_articles: { ...reusableModelComp_1.optionalStringArray },
-    interests: { ...reusableModelComp_1.requiredStringArray }
+    interests: { ...reusableModelComp_1.optionalStringArray }
 });
 exports.UserModel = (0, mongoose_1.model)(exports.DOCUMENT_NAME, exports.userSchema, exports.COLLECTION_NAME);
 //# sourceMappingURL=User.js.map

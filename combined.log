@@ -1,3 +1,24 @@
 info: GET / 200 36 - 6.867 ms
 error: No Such route Found: /favicon.ico
 info: GET /favicon.ico 500 33 - 2.088 ms
+error: listen EADDRINUSE: address already in use :::3000 {"address":"::","code":"EADDRINUSE","errno":"EADDRINUSE","port":3000,"syscall":"listen"}
+error: No Such route Found: /api/user/register
+info: POST /api/user/register 500 39 - 8.683 ms
+error: No Such route Found: /api/user/register
+info: POST /api/user/register 500 39 - 17.970 ms
+error: No Such route Found: /api/user/register
+info: POST /api/user/register 500 39 - 1.137 ms
+info: POST /user/register 400 52 - 46.612 ms
+info: POST /user/register 400 839 - 63.303 ms
+info: POST /user/register 400 319 - 44.556 ms
+info: POST /user/register 400 52 - 18.797 ms
+info: POST /user/register 400 319 - 7.681 ms
+info: POST /user/login 400 22 - 6.837 ms
+info: POST /user/login 400 18 - 3.291 ms
+info: POST /user/login 400 18 - 1.248 ms
+info: POST /user/login 400 18 - 35.620 ms
+info: POST /user/login 400 18 - 16.433 ms
+info: POST /user/login 400 18 - 21.342 ms
+info: POST /user/login 400 18 - 19.893 ms
+info: POST /user/login 400 18 - 46.801 ms
+info: POST /user/login 400 52 - 22.222 ms

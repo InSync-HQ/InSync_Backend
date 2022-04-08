@@ -17,9 +17,9 @@ export const userSchema = new Schema({
     name: { ...requiredString },
     email: { ...requiredString },
     pwd: { ...requiredString },
-    communities: { ...requiredStringArray },
+    communities: { ...optionalStringArray },
     saved_articles: { ...optionalStringArray },
-    interests: { ...requiredStringArray }
+    interests: { ...optionalStringArray }
 });
 
 export const UserModel = model<IUser>(
