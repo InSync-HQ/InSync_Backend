@@ -10,8 +10,19 @@ const axios_1 = __importDefault(require("axios"));
 const router = express_1.default.Router();
 router.get("/general", async (req, res) => {
     try {
-        logger_1.default.info(`The api key is ${config_1.newsApiKey}`);
         let news = await axios_1.default.get(`https://newsapi.org/v2/top-headlines?apiKey=${config_1.newsApiKey}&category=general&language=en`);
+        return res.status(200).send(news.data);
+    }
+    catch (err) {
+        logger_1.default.error(err);
+        return res.status(500).json({ "err": "Invalid/Expired API News Api" });
+    }
+});
+router.get("/search", async (req, res) => {
+    if (!req.query.q)
+        return res.status(404).json({ "err": "the the query param 'q' is required." });
+    try {
+        let news = await axios_1.default.get(`https://newsapi.org/v2/everything?q=${req.query.q}&apiKey=${config_1.newsApiKey}&language=en`);
         return res.status(200).send(news.data);
     }
     catch (err) {

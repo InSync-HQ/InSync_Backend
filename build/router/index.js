@@ -8,6 +8,6 @@ const userRoutes_1 = __importDefault(require("./userRoutes"));
 const fetchNewsRoutes_1 = __importDefault(require("./fetchNewsRoutes"));
 const router = express_1.default.Router();
 router.use("/user/", userRoutes_1.default);
-router.use("/news/", fetchNewsRoutes_1.default);
+router.use("/news/newsapi", fetchNewsRoutes_1.default);
 exports.default = router;
 //# sourceMappingURL=index.js.map

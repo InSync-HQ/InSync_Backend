@@ -4,5 +4,5 @@ import fetchNewsRoutes from './fetchNewsRoutes'
 const router = express.Router();
 
 router.use("/user/", userRoutes);
-router.use("/news/", fetchNewsRoutes)
+router.use("/news/newsapi", fetchNewsRoutes)
 export default router;
