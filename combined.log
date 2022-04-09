@@ -35,3 +35,5 @@ info: POST /user/register 400 2 - 10023.443 ms
 info: POST /user/login 400 17 - 2.263 ms
 info: POST /user/login - - - - ms
 info: POST /user/register - - - - ms
+info: POST /user/register - - - - ms
+info: POST /user/register - - - - ms
