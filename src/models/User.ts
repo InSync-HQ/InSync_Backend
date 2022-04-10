@@ -7,17 +7,17 @@ export const COLLECTION_NAME = "users";
 export interface IUser extends Document {
     email: string;
     pwd: string;
-    communities: string[];
-    saved_articles: string[];
-    interests: string[];
+    communities?: string[];
+    saved_articles?: string[];
+    interests?: string[];
 }
 
 export const userSchema = new Schema({
     email: { ...requiredString },
     pwd: { ...requiredString },
-    communities: { ...requiredStringArray },
+    communities: { ...optionalStringArray },
     saved_articles: { ...optionalStringArray },
-    interests: { ...requiredStringArray }
+    interests: { ...optionalStringArray }
 });
 
 export const UserModel = model<IUser>(

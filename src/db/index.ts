@@ -6,30 +6,22 @@ import logger from "../core/logger";
 const dbURI: string = environment === "dev" ? db.devUrl : db.prodUrl;
 
 const options = {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    autoIndex: true,
-    poolSize: 10, // Maintain up to 10 socket connections
-    // If not connected, return errors immediately rather than waiting for reconnect
-    bufferMaxEntries: 0,
-    connectTimeoutMS: 10000, // Give up initial connection after 10 seconds
+    autoIndex: false, // Don't build indexes
+    maxPoolSize: 10, // Maintain up to 10 socket connections
+    serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
     socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
+    family: 4 // Use IPv4, skip trying IPv6
 };
 
-logger.debug(dbURI);
 
 // Create the database connection
-mongoose
-    .connect(dbURI, options)
-    .then(() => {
-        logger.info("Mongoose connection done");
-    })
-    .catch((e) => {
-        logger.info("Mongoose connection error");
-        logger.error(e);
-    });
+
+mongoose.connect(dbURI, options).then(
+    () => logger.info(`Mongoose connection successful: ${dbURI}`),
+    err => logger.info(`Mongoose connection failed: ${dbURI}`)
+);
+
+
 
 // CONNECTION EVENTS
 // When successfully connected

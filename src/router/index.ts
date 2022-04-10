@@ -1,5 +1,5 @@
 import express from 'express';
-import userRoutes from "./userRoutes";
+import userRoutes from "./user/userRoutes";
 import fetchNewsRoutes from './fetchNewsRoutes'
 const router = express.Router();
 

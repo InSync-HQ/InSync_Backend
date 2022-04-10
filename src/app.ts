@@ -6,6 +6,7 @@ import { port } from "./config";
 import requestlogger from "./core/requestlogger";
 import morgan from "morgan";
 import logger from "./core/logger";
+import "./db";
 
 const app = express();
 

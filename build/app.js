@@ -10,6 +10,7 @@ const config_1 = require("./config");
 const requestlogger_1 = __importDefault(require("./core/requestlogger"));
 const morgan_1 = __importDefault(require("morgan"));
 const logger_1 = __importDefault(require("./core/logger"));
+require("./db");
 const app = (0, express_1.default)();
 process.on("uncaughtException", (e) => {
     logger_1.default.error(e);
