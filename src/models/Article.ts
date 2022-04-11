@@ -16,8 +16,6 @@ export default interface IArticle extends Document {
 }
 
 
-
-
 export const articleSchema = new Schema({
     source_url: { ...requiredString },
     media_url: { ...requiredString },
