@@ -2,3 +2,4 @@ node_modules/
 combined.log
 *.log
 secrects.json
+build/
