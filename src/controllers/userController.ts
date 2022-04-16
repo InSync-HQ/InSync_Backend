@@ -63,3 +63,25 @@ export const fetchUser = async (req: Request, res: Response, next: NextFunction)
     }
     return res.json({ user });
 }
+
+export const updateUser = async (req: Request, res: Response, next: NextFunction) => {
+    const user = await UserRepo.findById(req.params.id);
+    if (!user) {
+        const error: IError = new Error(`id ${req.params.id} invalid`);
+        error.status = 404;
+        return next(error);
+    }
+    if (req.body.name) user.name = req.body.name;
+    if (req.body.communities) user.communities = req.body.communities;
+    if (req.body.interests) user.interests = req.body.interests;
+    if (req.body.saved_articles) user.saved_articles = req.body.saved_articles;
+
+    try {
+        await UserRepo.update(user)
+        return res.json({ user });
+    } catch (err) {
+        const error: IError = new Error(`Error in updating user`);
+        error.error = err;
+        return next(error);
+    }
+}

@@ -12,12 +12,12 @@ export const optionalString = {
     trim: true,
 }
 export const optionalStringArray = {
-    type: Schema.Types.String,
+    type: [Schema.Types.String],
     trim: true,
 }
 
 export const requiredStringArray = {
-    type: Schema.Types.String,
+    type: [Schema.Types.String],
     required: true,
     trim: true,
 }

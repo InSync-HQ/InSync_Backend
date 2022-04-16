@@ -1,5 +1,5 @@
 import express from "express";
-import { registerUser, loginUser, fetchUser } from "../../controllers/userController"
+import { registerUser, loginUser, fetchUser, updateUser } from "../../controllers/userController"
 import validator from "../../helpers/validator";
 import userSchema from "./userSchema";
 import passport from "passport";
@@ -21,5 +21,5 @@ router.get('/protected', (req, res, next) => {
         next(error);
     }
 });
-
+router.patch("/updateById/:id", validator(userSchema.update), updateUser);
 export default router;
