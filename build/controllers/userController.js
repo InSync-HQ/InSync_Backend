@@ -43,14 +43,14 @@ const loginUser = async (req, res, next) => {
     if (!user) {
         const error = new Error(`Email ${req.body.email} does not belong to a registered user.`);
         error.status = 404;
-        next(error);
+        return next(error);
     }
     if (req.body.pwd) {
         var isValid = await bcryptjs_1.default.compare(req.body.pwd, user.pwd);
         if (!isValid) {
-            const error = new Error(`passwords do not match`);
+            const error = new Error(`incorrect password`);
             error.status = 401;
-            next(error);
+            return next(error);
         }
     }
     const tokens = (0, issueJWT_1.default)(user);

@@ -41,14 +41,14 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
     if (!user) {
         const error: IError = new Error(`Email ${req.body.email} does not belong to a registered user.`);
         error.status = 404;
-        next(error);
+        return next(error);
     }
     if (req.body.pwd) {
         var isValid = await bcrypt.compare(req.body.pwd, user.pwd);
         if (!isValid) {
-            const error: IError = new Error(`passwords do not match`)
+            const error: IError = new Error(`incorrect password`)
             error.status = 401;
-            next(error);
+            return next(error);
         }
     }
     const tokens = issueJWT(user);
