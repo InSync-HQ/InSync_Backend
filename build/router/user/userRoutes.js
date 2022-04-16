@@ -7,9 +7,22 @@ const express_1 = __importDefault(require("express"));
 const userController_1 = require("../../controllers/userController");
 const validator_1 = __importDefault(require("../../helpers/validator"));
 const userSchema_1 = __importDefault(require("./userSchema"));
+const passport_1 = __importDefault(require("passport"));
+const logger_1 = __importDefault(require("../../core/logger"));
 const router = express_1.default.Router();
 router.post("/register", (0, validator_1.default)(userSchema_1.default.register), userController_1.registerUser);
 router.post("/login", (0, validator_1.default)(userSchema_1.default.login), userController_1.loginUser);
+router.get('/protected', passport_1.default.authenticate('jwt', { session: false }), (req, res, next) => {
+    logger_1.default.info("test");
+    try {
+        return res.status(200).json({ success: true, msg: "You are successfully authenticated to this route!" });
+    }
+    catch (err) {
+        const error = new Error("jwt invlid/expired");
+        error.error = err;
+        next(error);
+    }
+});
 router.get("/:id", userController_1.fetchUser);
 exports.default = router;
 //# sourceMappingURL=userRoutes.js.map

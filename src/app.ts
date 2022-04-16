@@ -6,7 +6,14 @@ import { port } from "./config";
 import requestlogger from "./core/requestlogger";
 import morgan from "morgan";
 import logger from "./core/logger";
+import passport from 'passport'
+
 import "./db";
+
+
+import passportMiddleware from './helpers/passport'
+passportMiddleware(passport);
+
 
 const app = express();
 
@@ -24,7 +31,7 @@ app.use(
 );
 app.use(cors({ origin: "*", optionsSuccessStatus: 200 }));
 app.use(morgan("tiny", { stream: requestlogger }));
-
+app.use(passport.initialize());
 
 
 app.get("/", (req, res) => {
