@@ -13,4 +13,7 @@ export default class ArticleRepo {
     public async findById(_id: string): Promise<IArticle> {
         return ArticleModel.findById(_id).lean<IArticle>().exec();
     }
+    public async deleteById(_id: string): Promise<IArticle> {
+        return ArticleModel.findByIdAndDelete(_id).lean<IArticle>().exec();
+    }
 }

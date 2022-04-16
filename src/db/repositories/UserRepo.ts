@@ -16,4 +16,7 @@ export default class UserRepo {
     public static async findById(_id: string): Promise<IUser> {
         return UserModel.findById(_id).lean<IUser>().exec();
     }
+    public static async deleteById(_id: string): Promise<IUser> {
+        return UserModel.findByIdAndDelete(_id).lean<IUser>().exec();
+    }
 }

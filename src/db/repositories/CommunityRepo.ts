@@ -15,4 +15,8 @@ export class CommunityRepo {
     public async findById(_id: string): Promise<ICommunity> {
         return CommunityModel.findById(_id).lean<ICommunity>().exec();
     }
+
+    public async deleteById(_id: string): Promise<ICommunity> {
+        return CommunityModel.findByIdAndDelete(_id).lean<ICommunity>().exec();
+    }
 }
