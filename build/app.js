@@ -35,7 +35,7 @@ app.use("/", router_1.default);
 app.use((req, res, next) => next(new Error(`No Such route Found: ${res.req.originalUrl}`)));
 app.use((err, req, res, next) => {
     logger_1.default.error(err);
-    return res.status(500).send(err.message);
+    return res.status(500).json({ success: false, msg: err.message });
 });
 app.listen(config_1.port, () => {
     console.log(`Server started at port:${config_1.port}`);
