@@ -28,7 +28,7 @@ export const registerUser = async (req: Request, res: Response, next: NextFuncti
     try {
         const savedUser = await UserRepo.create(userData);
         const tokenObj = issueJWT(savedUser);
-        return res.send({ user: savedUser, tokens: tokenObj });
+        return res.json({ user: savedUser, tokens: tokenObj });
     }
     catch (err) {
         const error: IError = new Error(`unable to create new user: ${req.body.email}`);
@@ -55,5 +55,11 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
     return res.json({ user, tokens });
 }
 export const fetchUser = async (req: Request, res: Response, next: NextFunction) => {
-    next();
+    const user = await UserRepo.findById(req.params.id);
+    if (!user) {
+        const error: IError = new Error(`id ${req.params.id} invalid`);
+        error.status = 404;
+        return next(error);
+    }
+    return res.json({ user });
 }
