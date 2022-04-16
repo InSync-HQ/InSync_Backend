@@ -1,6 +1,6 @@
 import IArticle, { ArticleModel } from "../../models/Article";
 
-export class ArticleRepo {
+export default class ArticleRepo {
     public async create(user: IArticle): Promise<IArticle> {
         const createdUser = await ArticleModel.create(user);
         return createdUser.toObject() as IArticle;

@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from "express";
-import { UserModel } from "../models/User";
 import bcrypt from "bcryptjs";
 import issueJWT from "../helpers/issueJWT";
+import UserRepo from "../db/repositories/UserRepo";
 export const registerUser = async (req: Request, res: Response, next: NextFunction) => {
 
-    const emailExists = await UserModel.findOne({ email: req.body.email });
+    const emailExists = await UserRepo.findByEmail(req.body.email);
     if (emailExists)
         return res.status(400).send("Email already exists.");
 
@@ -26,7 +26,7 @@ export const registerUser = async (req: Request, res: Response, next: NextFuncti
     })
 
     try {
-        const savedUser = await UserModel.create(userData);
+        const savedUser = await UserRepo.create(userData);
         const tokenObj = issueJWT(savedUser);
         return res.send({ user: savedUser, tokens: tokenObj });
     }
@@ -37,7 +37,7 @@ export const registerUser = async (req: Request, res: Response, next: NextFuncti
     }
 }
 export const loginUser = async (req: Request, res: Response, next: NextFunction) => {
-    const user = await UserModel.findOne({ email: req.body.email });
+    const user = await UserRepo.findByEmail(req.body.email);
     if (!user) {
         const error: IError = new Error(`Email ${req.body.email} does not belong to a registered user.`);
         error.status = 404;

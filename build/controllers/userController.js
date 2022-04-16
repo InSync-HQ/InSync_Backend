@@ -4,11 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.fetchUser = exports.loginUser = exports.registerUser = void 0;
-const User_1 = require("../models/User");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const issueJWT_1 = __importDefault(require("../helpers/issueJWT"));
+const UserRepo_1 = __importDefault(require("../db/repositories/UserRepo"));
 const registerUser = async (req, res, next) => {
-    const emailExists = await User_1.UserModel.findOne({ email: req.body.email });
+    const emailExists = await UserRepo_1.default.findByEmail(req.body.email);
     if (emailExists)
         return res.status(400).send("Email already exists.");
     let hashedPassword = undefined;
@@ -27,7 +27,7 @@ const registerUser = async (req, res, next) => {
             delete userData[key];
     });
     try {
-        const savedUser = await User_1.UserModel.create(userData);
+        const savedUser = await UserRepo_1.default.create(userData);
         const tokenObj = (0, issueJWT_1.default)(savedUser);
         return res.send({ user: savedUser, tokens: tokenObj });
     }
@@ -39,7 +39,7 @@ const registerUser = async (req, res, next) => {
 };
 exports.registerUser = registerUser;
 const loginUser = async (req, res, next) => {
-    const user = await User_1.UserModel.findOne({ email: req.body.email });
+    const user = await UserRepo_1.default.findByEmail(req.body.email);
     if (!user) {
         const error = new Error(`Email ${req.body.email} does not belong to a registered user.`);
         error.status = 404;

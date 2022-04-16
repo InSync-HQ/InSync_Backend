@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ArticleRepo = void 0;
 const Article_1 = require("../../models/Article");
 class ArticleRepo {
     async create(user) {
@@ -16,5 +15,5 @@ class ArticleRepo {
         return Article_1.ArticleModel.findById(_id).lean().exec();
     }
 }
-exports.ArticleRepo = ArticleRepo;
+exports.default = ArticleRepo;
 //# sourceMappingURL=ArticleRepo.js.map
