@@ -6,7 +6,14 @@ import { port } from "./config";
 import requestlogger from "./core/requestlogger";
 import morgan from "morgan";
 import logger from "./core/logger";
+import passport from 'passport'
+
 import "./db";
+
+
+import passportMiddleware from './helpers/passport'
+passportMiddleware(passport);
+
 
 const app = express();
 
@@ -24,7 +31,7 @@ app.use(
 );
 app.use(cors({ origin: "*", optionsSuccessStatus: 200 }));
 app.use(morgan("tiny", { stream: requestlogger }));
-
+app.use(passport.initialize());
 
 
 app.get("/", (req, res) => {
@@ -38,7 +45,7 @@ app.use((req, res, next) => next(new Error(`No Such route Found: ${res.req.origi
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     logger.error(err);
-    return res.status(500).send(err.message);
+    return res.status(500).json({ success: false, msg: err.message });
 })
 
 app.listen(port, () => {

@@ -7,7 +7,9 @@ exports.DOCUMENT_NAME = "user";
 exports.COLLECTION_NAME = "users";
 exports.userSchema = new mongoose_1.Schema({
     email: { ...reusableModelComp_1.requiredString },
-    pwd: { ...reusableModelComp_1.requiredString },
+    provider: { ...reusableModelComp_1.requiredString },
+    pwd: { ...reusableModelComp_1.optionalString },
+    name: { ...reusableModelComp_1.optionalString },
     communities: { ...reusableModelComp_1.optionalStringArray },
     saved_articles: { ...reusableModelComp_1.optionalStringArray },
     interests: { ...reusableModelComp_1.optionalStringArray }

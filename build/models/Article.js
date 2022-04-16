@@ -7,7 +7,7 @@ exports.DOCUMENT_NAME = "article";
 exports.COLLECTION_NAME = "articles";
 exports.articleSchema = new mongoose_1.Schema({
     source_url: { ...reusableModelComp_1.requiredString },
-    media_url: { ...reusableModelComp_1.requiredString },
+    media_url: { ...reusableModelComp_1.optionalString },
     desc: { ...reusableModelComp_1.optionalString },
     upvotes: { ...reusableModelComp_1.numberField },
     downvotes: { ...reusableModelComp_1.numberField },

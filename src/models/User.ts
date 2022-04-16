@@ -1,20 +1,24 @@
 import { Schema, Document, model } from "mongoose";
-import { requiredString, optionalStringArray, requiredStringArray } from "./reusableModelComp"
+import { requiredString, optionalStringArray, requiredStringArray, optionalString } from "./reusableModelComp"
 
 export const DOCUMENT_NAME = "user";
 export const COLLECTION_NAME = "users";
 
 export interface IUser extends Document {
     email: string;
-    pwd: string;
+    pwd?: string;
+    name?: string
     communities?: string[];
     saved_articles?: string[];
     interests?: string[];
+    provider?: string // must be google,facebook,local
 }
 
 export const userSchema = new Schema({
     email: { ...requiredString },
-    pwd: { ...requiredString },
+    provider: { ...requiredString },
+    pwd: { ...optionalString },
+    name: { ...optionalString },
     communities: { ...optionalStringArray },
     saved_articles: { ...optionalStringArray },
     interests: { ...optionalStringArray }
