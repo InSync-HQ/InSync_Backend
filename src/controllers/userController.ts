@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import issueJWT from "../helpers/issueJWT";
 import UserRepo from "../db/repositories/UserRepo";
+import { IError, ProtectedReq } from "../types/types";
 export const registerUser = async (req: Request, res: Response, next: NextFunction) => {
 
     const emailExists = await UserRepo.findByEmail(req.body.email);
@@ -54,20 +55,20 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
     const tokens = issueJWT(user);
     return res.json({ user, tokens });
 }
-export const fetchUser = async (req: Request, res: Response, next: NextFunction) => {
-    const user = await UserRepo.findById(req.params.id);
+export const fetchUser = async (req: ProtectedReq, res: Response, next: NextFunction) => {
+    const user = await UserRepo.findById(req.user_id);
     if (!user) {
-        const error: IError = new Error(`id ${req.params.id} invalid`);
+        const error: IError = new Error(`id ${req.user_id} invalid`);
         error.status = 404;
         return next(error);
     }
     return res.json({ user });
 }
 
-export const updateUser = async (req: Request, res: Response, next: NextFunction) => {
-    const user = await UserRepo.findById(req.params.id);
+export const updateUser = async (req: ProtectedReq, res: Response, next: NextFunction) => {
+    const user = await UserRepo.findById(req.user_id);
     if (!user) {
-        const error: IError = new Error(`id ${req.params.id} invalid`);
+        const error: IError = new Error(`id ${req.user_id} invalid`);
         error.status = 404;
         return next(error);
     }

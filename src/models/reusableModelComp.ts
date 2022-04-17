@@ -17,6 +17,17 @@ export const optionalStringArray = {
     default: [] as string[],
 }
 
+export const requiredUserId = {
+    type: Schema.Types.ObjectId,
+    ref: "user",
+    required: true,
+}
+
+export const optionalUserArray = {
+    type: [Schema.Types.ObjectId],
+    ref: "user",
+}
+
 export const requiredStringArray = {
     type: [Schema.Types.String],
     required: true,

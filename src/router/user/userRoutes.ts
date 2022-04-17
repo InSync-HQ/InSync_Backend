@@ -3,6 +3,7 @@ import { registerUser, loginUser, fetchUser, updateUser } from "../../controller
 import validator from "../../helpers/validator";
 import userSchema from "./userSchema";
 import passport from "passport";
+import { IError } from "../../types/types";
 
 
 const router = express.Router();
@@ -11,7 +12,7 @@ router.post("/register", validator(userSchema.register), registerUser);
 router.post("/login", validator(userSchema.login), loginUser);
 
 router.use("/", passport.authenticate('jwt', { session: false }));
-router.get("/fetchById/:id", fetchUser);
+router.get("/me", fetchUser);
 router.get('/protected', (req, res, next) => {
     try {
         return res.status(200).json({ success: true, msg: "You are successfully authenticated to this route!" });
@@ -21,5 +22,5 @@ router.get('/protected', (req, res, next) => {
         next(error);
     }
 });
-router.patch("/updateById/:id", validator(userSchema.update), updateUser);
+router.patch("/update", validator(userSchema.update), updateUser);
 export default router;
