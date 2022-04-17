@@ -8,5 +8,13 @@ export default {
         interests: Joi.array().items(Joi.string()),
         users: Joi.array().items(Joi.string()),
         newsfeed: Joi.array().items(Joi.string()),
+    }),
+    "update": Joi.object().keys({
+        name: Joi.string(),
+        mod_id: Joi.string(),
+        desc: Joi.string(),
+        interests: Joi.array().items(Joi.string()),
+        users: Joi.array().items(Joi.string()),
+        newsfeed: Joi.array().items(Joi.string()),
     })
 }

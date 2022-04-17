@@ -78,8 +78,8 @@ export const updateUser = async (req: ProtectedReq, res: Response, next: NextFun
     if (req.body.saved_articles) user.saved_articles = req.body.saved_articles;
 
     try {
-        await UserRepo.update(user)
-        return res.json({ user });
+        const updatedUser = await UserRepo.update(user)
+        return res.json({ user: updatedUser });
     } catch (err) {
         const error: IError = new Error(`Error in updating user`);
         error.error = err;

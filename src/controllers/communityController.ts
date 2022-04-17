@@ -23,3 +23,27 @@ export const fetchAllCommunity = async (req: ProtectedReq, res: Response, next: 
     const communties = await CommunityRepo.fetchAll();
     return res.json({ communties });
 }
+
+export const updateCommunity = async (req: ProtectedReq, res: Response, next: NextFunction) => {
+    const community = await CommunityRepo.findById(req.params.id);
+    if (!community) {
+        const error: IError = new Error(`community id ${req.user_id} invalid/not found`);
+        error.status = 404;
+        return next(error);
+    }
+    if (req.body.name) community.name = req.body.name;
+    if (req.body.mod_id) community.mod_id = req.body.mod_id;
+    if (req.body.interests) community.interests = req.body.interests;
+    if (req.body.desc) community.desc = req.body.desc;
+    if (req.body.users) community.users = req.body.users;
+    if (req.body.newsfeed) community.newsfeed = req.body.newsfeed;
+
+    try {
+        const updatedCommunity = await CommunityRepo.update(community)
+        return res.json({ community: updatedCommunity });
+    } catch (err) {
+        const error: IError = new Error(`Error in updating user`);
+        error.error = err;
+        return next(error);
+    }
+}

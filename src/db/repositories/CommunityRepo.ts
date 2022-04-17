@@ -5,7 +5,7 @@ export default class CommunityRepo {
         return createdUser.toObject() as ICommunity;
     }
     public static async update(community: ICommunity): Promise<any> {
-        return CommunityModel.updateOne({ _id: community._id }, { ...community })
+        return CommunityModel.findOneAndUpdate({ _id: community._id }, { ...community }, { new: true })
             .lean<ICommunity>()
             .exec();
     }

@@ -5,8 +5,8 @@ export default class UserRepo {
         const createdUser = await UserModel.create(user);
         return createdUser.toObject() as IUser;
     }
-    public static async update(user: IUser): Promise<any> {
-        return UserModel.updateOne({ _id: user._id }, { ...user })
+    public static async update(user: IUser): Promise<IUser> {
+        return UserModel.findOneAndUpdate({ _id: user._id }, { ...user }, { new: true })
             .lean<IUser>()
             .exec();
     }
