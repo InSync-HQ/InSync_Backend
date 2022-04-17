@@ -1,19 +1,23 @@
 import { Schema, Document, model } from "mongoose";
-import { requiredString, numberField } from "./reusableModelComp"
+import { requiredString, numberField, requiredArticleId, requiredUserId } from "./reusableModelComp"
 
 export const DOCUMENT_NAME = "comment";
 export const COLLECTION_NAME = "comments";
 
-export interface IComment extends Document {
-    content: string;
-    artice_id: string;
+export default interface IComment extends Document {
+    message: string;
+    article_id: string;
     user_id: string;
-    upvotes: number;
-    downvotes: number;
+    upvotes?: number;
+    downvotes?: number;
+    createdAt: Date,
+    updatedAt: Date,
 }
 
 export const commentSchema = new Schema({
     message: { ...requiredString },
+    article_id: { ...requiredArticleId },
+    user_id: { ...requiredUserId },
     upvotes: { ...numberField },
     downvotes: { ...numberField }
 });

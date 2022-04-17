@@ -39,6 +39,18 @@ export const requiredDate = {
     required: true,
 }
 
+export const optionalArticleArray = {
+    type: [Schema.Types.ObjectId],
+    ref: "article",
+    default: [] as string[],
+}
+
+export const requiredArticleId = {
+    type: Schema.Types.ObjectId,
+    ref: "article",
+    required: true,
+}
+
 export const requiredStringArray = {
     type: [Schema.Types.String],
     required: true,
