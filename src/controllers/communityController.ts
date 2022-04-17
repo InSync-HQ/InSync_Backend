@@ -1,14 +1,25 @@
 import { NextFunction, Request, Response } from "express";
 import CommunityRepo from '../db/repositories/CommunityRepo'
-import { IError } from "../types/types";
+import { IError, ProtectedReq } from "../types/types";
 
-export const createCommunity = async (req: Request, res: Response, next: NextFunction) => {
+export const createCommunity = async (req: ProtectedReq, res: Response, next: NextFunction) => {
+    const communityExists = await CommunityRepo.fetchByName(req.body.name);
+    if (communityExists) {
+        const error: IError = new Error(`community by name ${req.body.name} already exists. Try another name.`);
+        error.status = 404;
+        return next(error);
+    }
     try {
-        const community = CommunityRepo.create(req.body);
+        const community = await CommunityRepo.create(req.body);
         return res.json({ community });
     } catch (err) {
         const error: IError = new Error(`Error in creating community`);
         error.error = err;
-        next(error);
+        return next(error);
     }
+}
+
+export const fetchAllCommunity = async (req: ProtectedReq, res: Response, next: NextFunction) => {
+    const communties = await CommunityRepo.fetchAll();
+    return res.json({ communties });
 }

@@ -1,5 +1,5 @@
 import { CommunityModel, ICommunity } from "../../models/Community";
-export default class UserRepo {
+export default class CommunityRepo {
     public static async create(community: ICommunity): Promise<ICommunity> {
         const createdUser = await CommunityModel.create(community);
         return createdUser.toObject() as ICommunity;
@@ -11,6 +11,9 @@ export default class UserRepo {
     }
     public static async fetchAll(): Promise<ICommunity[]> {
         return CommunityModel.find({}).lean<ICommunity[]>().exec();
+    }
+    public static async fetchByName(name: string): Promise<ICommunity> {
+        return CommunityModel.findOne({ name }).lean<ICommunity>().exec();
     }
     public static async findById(_id: string): Promise<ICommunity> {
         return CommunityModel.findById(_id).lean<ICommunity>().exec();
