@@ -1,5 +1,5 @@
 import { Schema, Document, model } from "mongoose";
-import { requiredString, optionalStringArray, requiredStringArray, optionalString } from "./reusableModelComp"
+import { requiredString, optionalStringArray, requiredStringArray, optionalString, optionalCommuntiesArray } from "./reusableModelComp"
 
 export const DOCUMENT_NAME = "user";
 export const COLLECTION_NAME = "users";
@@ -19,7 +19,7 @@ export const userSchema = new Schema({
     provider: { ...requiredString },
     pwd: { ...optionalString },
     name: { ...optionalString },
-    communities: { ...optionalStringArray },
+    communities: { ...optionalCommuntiesArray },
     saved_articles: { ...optionalStringArray },
     interests: { ...optionalStringArray }
 });

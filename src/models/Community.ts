@@ -1,6 +1,5 @@
 import { Schema, Document, model } from "mongoose";
-import { IUser } from "./User";
-import { requiredString, requiredStringArray, optionalStringArray, optionalString, requiredUserId, optionalUserArray } from "./reusableModelComp"
+import { requiredString, optionalStringArray, optionalString, requiredUserId, optionalUserArray } from "./reusableModelComp"
 
 export const DOCUMENT_NAME = "community";
 export const COLLECTION_NAME = "communities";

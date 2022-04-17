@@ -26,6 +26,13 @@ export const requiredUserId = {
 export const optionalUserArray = {
     type: [Schema.Types.ObjectId],
     ref: "user",
+    default: [] as string[]
+}
+
+export const optionalCommuntiesArray = {
+    type: [Schema.Types.ObjectId],
+    ref: "community",
+    default: [] as string[],
 }
 
 export const requiredStringArray = {
