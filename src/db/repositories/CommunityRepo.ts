@@ -1,12 +1,18 @@
 import { CommunityModel, ICommunity } from "../../models/Community";
-
-
-export class CommunityRepo {
-    public async create(community: ICommunity) {
-        try {
-            const createdCommunity = await CommunityModel.create(community);
-        } catch (err) {
-            return err;
-        }
+export default class UserRepo {
+    public static async create(community: ICommunity): Promise<ICommunity> {
+        const createdUser = await CommunityModel.create(community);
+        return createdUser.toObject() as ICommunity;
+    }
+    public static async update(community: ICommunity): Promise<any> {
+        return CommunityModel.updateOne({ _id: community._id }, { ...community })
+            .lean<ICommunity>()
+            .exec();
+    }
+    public static async fetchAll(): Promise<ICommunity[]> {
+        return CommunityModel.find({}).lean<ICommunity[]>().exec();
+    }
+    public static async findById(_id: string): Promise<ICommunity> {
+        return CommunityModel.findById(_id).lean<ICommunity>().exec();
     }
 }

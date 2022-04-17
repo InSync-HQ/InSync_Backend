@@ -1,26 +1,26 @@
 import { Schema, Document, model } from "mongoose";
 import { IUser } from "./User";
-import { requiredString, requiredStringArray, optionalStringArray } from "./reusableModelComp"
+import { requiredString, requiredStringArray, optionalStringArray, optionalString } from "./reusableModelComp"
 
 export const DOCUMENT_NAME = "community";
 export const COLLECTION_NAME = "communities";
 
 export interface ICommunity extends Document {
     name: string;
-    desc: string;
-    interests: string[];
+    desc?: string;
+    interests?: string[];
     mod_id: string;
-    users: string[];
-    newsfeed: string[];
+    users?: string[];
+    newsfeed?: string[];
 }
 
 export const communitySchema = new Schema({
     name: { ...requiredString },
-    desc: { ...requiredString },
-    interests: { ...requiredStringArray },
     mod_id: { ...requiredString },
-    users: { ...requiredStringArray },
-    newsfeed: { ...requiredStringArray }
+    desc: { ...optionalString },
+    interests: { ...optionalStringArray },
+    users: { ...optionalStringArray },
+    newsfeed: { ...optionalStringArray }
 });
 
 export const CommunityModel = model<ICommunity>(

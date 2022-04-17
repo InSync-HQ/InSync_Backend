@@ -14,11 +14,13 @@ export const optionalString = {
 export const optionalStringArray = {
     type: [Schema.Types.String],
     trim: true,
+    default: [] as string[],
 }
 
 export const requiredStringArray = {
     type: [Schema.Types.String],
     required: true,
+    default: [] as string[],
     trim: true,
 }
 
