@@ -66,17 +66,13 @@ export const fetchUser = async (req: ProtectedReq, res: Response, next: NextFunc
 }
 
 export const updateUser = async (req: ProtectedReq, res: Response, next: NextFunction) => {
-    const user = await UserRepo.findById(req.user_id);
+    let user = await UserRepo.findById(req.user_id);
     if (!user) {
         const error: IError = new Error(`id ${req.user_id} invalid`);
         error.status = 404;
         return next(error);
     }
-    if (req.body.name) user.name = req.body.name;
-    if (req.body.communities) user.communities = req.body.communities;
-    if (req.body.interests) user.interests = req.body.interests;
-    if (req.body.saved_articles) user.saved_articles = req.body.saved_articles;
-
+    Object.assign(user, req.body);
     try {
         const updatedUser = await UserRepo.update(user)
         return res.json({ user: updatedUser });

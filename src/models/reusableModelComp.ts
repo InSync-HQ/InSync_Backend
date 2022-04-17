@@ -34,6 +34,10 @@ export const optionalCommuntiesArray = {
     ref: "community",
     default: [] as string[],
 }
+export const requiredDate = {
+    type: Schema.Types.Date,
+    required: true,
+}
 
 export const requiredStringArray = {
     type: [Schema.Types.String],

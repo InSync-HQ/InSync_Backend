@@ -6,12 +6,14 @@ export const COLLECTION_NAME = "comments";
 
 export interface IComment extends Document {
     content: string;
+    artice_id: string;
+    user_id: string;
     upvotes: number;
     downvotes: number;
 }
 
 export const commentSchema = new Schema({
-    content: { ...requiredString },
+    message: { ...requiredString },
     upvotes: { ...numberField },
     downvotes: { ...numberField }
 });
